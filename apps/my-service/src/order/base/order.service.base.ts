@@ -11,9 +11,14 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { PrismaService } from "../../prisma/prisma.service";
 import { Prisma, Order, Customer, Product } from "@prisma/client";
+import { PasswordService } from "../../auth/password.service";
+import { transformStringFieldUpdateInput } from "../../prisma.util";
 
 export class OrderServiceBase {
-  constructor(protected readonly prisma: PrismaService) {}
+  constructor(
+    protected readonly prisma: PrismaService,
+    protected readonly passwordService: PasswordService
+  ) {}
 
   async count<T extends Prisma.OrderCountArgs>(
     args: Prisma.SelectSubset<T, Prisma.OrderCountArgs>
@@ -34,12 +39,32 @@ export class OrderServiceBase {
   async create<T extends Prisma.OrderCreateArgs>(
     args: Prisma.SelectSubset<T, Prisma.OrderCreateArgs>
   ): Promise<Order> {
-    return this.prisma.order.create<T>(args);
+    return this.prisma.order.create<T>({
+      ...args,
+
+      data: {
+        ...args.data,
+        history: await this.passwordService.hash(args.data.history),
+      },
+    });
   }
   async update<T extends Prisma.OrderUpdateArgs>(
     args: Prisma.SelectSubset<T, Prisma.OrderUpdateArgs>
   ): Promise<Order> {
-    return this.prisma.order.update<T>(args);
+    return this.prisma.order.update<T>({
+      ...args,
+
+      data: {
+        ...args.data,
+
+        history:
+          args.data.history &&
+          (await transformStringFieldUpdateInput(
+            args.data.history,
+            (password) => this.passwordService.hash(password)
+          )),
+      },
+    });
   }
   async delete<T extends Prisma.OrderDeleteArgs>(
     args: Prisma.SelectSubset<T, Prisma.OrderDeleteArgs>

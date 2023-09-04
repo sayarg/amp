@@ -3,9 +3,9 @@ import {
   Show,
   SimpleShowLayout,
   ShowProps,
+  TextField,
   DateField,
   ReferenceField,
-  TextField,
 } from "react-admin";
 import { CUSTOMER_TITLE_FIELD } from "../customer/CustomerTitle";
 import { PRODUCT_TITLE_FIELD } from "../product/ProductTitle";
@@ -14,6 +14,7 @@ export const OrderShow = (props: ShowProps): React.ReactElement => {
   return (
     <Show {...props}>
       <SimpleShowLayout>
+        <TextField label="anotherOne" source="anotherOne" />
         <DateField source="createdAt" label="Created At" />
         <ReferenceField
           label="Customer"

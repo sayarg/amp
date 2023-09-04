@@ -2,6 +2,7 @@ import { Customer } from "../customer/Customer";
 import { Product } from "../product/Product";
 
 export type Order = {
+  anotherOne: string | null;
   createdAt: Date;
   customer?: Customer | null;
   discount: number | null;

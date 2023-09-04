@@ -215,6 +215,7 @@ export class ProductControllerBase {
     const results = await this.service.findOrders(params.id, {
       ...query,
       select: {
+        anotherOne: true,
         createdAt: true,
 
         customer: {

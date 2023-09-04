@@ -11,13 +11,30 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
+import {
+  IsString,
+  IsOptional,
+  ValidateNested,
+  IsNumber,
+  IsInt,
+} from "class-validator";
 import { CustomerWhereUniqueInput } from "../../customer/base/CustomerWhereUniqueInput";
-import { ValidateNested, IsOptional, IsNumber, IsInt } from "class-validator";
 import { Type } from "class-transformer";
 import { ProductWhereUniqueInput } from "../../product/base/ProductWhereUniqueInput";
 
 @InputType()
 class OrderCreateInput {
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  anotherOne?: string | null;
+
   @ApiProperty({
     required: false,
     type: () => CustomerWhereUniqueInput,
@@ -40,6 +57,17 @@ class OrderCreateInput {
     nullable: true,
   })
   discount?: number | null;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  history?: string | null;
 
   @ApiProperty({
     required: false,

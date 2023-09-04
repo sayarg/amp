@@ -35,6 +35,7 @@ export const CustomerShow = (props: ShowProps): React.ReactElement => {
           label="Orders"
         >
           <Datagrid rowClick="show">
+            <TextField label="anotherOne" source="anotherOne" />
             <DateField source="createdAt" label="Created At" />
             <ReferenceField
               label="Customer"

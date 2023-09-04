@@ -64,6 +64,7 @@ export class OrderControllerBase {
           : undefined,
       },
       select: {
+        anotherOne: true,
         createdAt: true,
 
         customer: {
@@ -105,6 +106,7 @@ export class OrderControllerBase {
     return this.service.findMany({
       ...args,
       select: {
+        anotherOne: true,
         createdAt: true,
 
         customer: {
@@ -147,6 +149,7 @@ export class OrderControllerBase {
     const result = await this.service.findOne({
       where: params,
       select: {
+        anotherOne: true,
         createdAt: true,
 
         customer: {
@@ -212,6 +215,7 @@ export class OrderControllerBase {
             : undefined,
         },
         select: {
+          anotherOne: true,
           createdAt: true,
 
           customer: {
@@ -262,6 +266,7 @@ export class OrderControllerBase {
       return await this.service.delete({
         where: params,
         select: {
+          anotherOne: true,
           createdAt: true,
 
           customer: {

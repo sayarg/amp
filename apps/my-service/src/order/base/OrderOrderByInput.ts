@@ -28,6 +28,17 @@ class OrderOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
+  anotherOne?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @IsOptional()
+  @IsEnum(SortOrder)
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
   createdAt?: SortOrder;
 
   @ApiProperty({
@@ -51,6 +62,17 @@ class OrderOrderByInput {
     nullable: true,
   })
   discount?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @IsOptional()
+  @IsEnum(SortOrder)
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
+  history?: SortOrder;
 
   @ApiProperty({
     required: false,
