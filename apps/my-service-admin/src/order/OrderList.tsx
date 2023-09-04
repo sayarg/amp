@@ -3,9 +3,9 @@ import {
   List,
   Datagrid,
   ListProps,
+  TextField,
   DateField,
   ReferenceField,
-  TextField,
 } from "react-admin";
 import Pagination from "../Components/Pagination";
 import { CUSTOMER_TITLE_FIELD } from "../customer/CustomerTitle";
@@ -21,6 +21,7 @@ export const OrderList = (props: ListProps): React.ReactElement => {
       pagination={<Pagination />}
     >
       <Datagrid rowClick="show">
+        <TextField label="anotherOne" source="anotherOne" />
         <DateField source="createdAt" label="Created At" />
         <ReferenceField
           label="Customer"
